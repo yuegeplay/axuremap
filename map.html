@@ -6,7 +6,7 @@
     <meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图" />
     <title>百度地图API自定义地图</title>
     <!--引用百度地图API-->
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jv5jV9lcR1mhSsFWZaFwIFshGYIph5YD"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=您的密匙"></script>
   </head>
   
   <body>
@@ -27,7 +27,7 @@
     }
     function createMap(){ 
       map = new BMap.Map("map"); 
-      map.centerAndZoom(new BMap.Point(110.308297,25.274546),16);
+      map.centerAndZoom(new BMap.Point(-77.308205,33.774458),6);
     }
     function setMapEvent(){
       map.enableScrollWheelZoom();
@@ -42,9 +42,9 @@
     }
     function addMapOverlay(){
       var markers = [
-        {content:"地址：桂林市XXXX联系方式：",title:"购物店1",imageOffset: {width:-46,height:-21},position:{lat:25.274888,lng:110.309447}},
-        {content:"地址：XXXX联系方式：XXXX",title:"购物店2",imageOffset: {width:-46,height:-21},position:{lat:25.27693,lng:110.302709}},
-        {content:"地址：XXXX 联系方式：XXX",title:"购物店3",imageOffset: {width:-46,height:-21},position:{lat:25.272748,lng:110.305036}},
+        {content:"行程共14天。1-3天：迈阿密；4-8天：华盛顿；9-14天：纽约",title:"1",imageOffset: {width:0,height:3},position:{lat:25.823604,lng:-80.306964}},
+        {content:"行程共14天。1-3天：迈阿密；4-8天：华盛顿；9-14天：纽约",title:"2",imageOffset: {width:0,height:3},position:{lat:38.889569,lng:-77.142629}},
+        {content:"行程共14天。1-3天：迈阿密；4-8天：华盛顿；9-14天：纽约",title:"3",imageOffset: {width:0,height:3},position:{lat:40.937928,lng:-73.858711}}
       ];
       for(var index = 0; index < markers.length; index++ ){
         var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
@@ -62,6 +62,23 @@
         addClickHandler(marker,infoWindow);
         map.addOverlay(marker);
       };
+      var plOpts = [
+        {strokeColor:"#f00",strokeWeight:"4",strokeOpacity:"0.6"}
+      ];
+      var plPath = [
+        [
+          new BMap.Point(-80.306964,25.823604),
+          new BMap.Point(-77.142629,38.889569),
+          new BMap.Point(-73.86791,40.929556),
+          new BMap.Point(-73.831115,40.929556),
+          new BMap.Point(-73.831115,40.929556),
+          new BMap.Point(-73.831115,40.929556)
+        ],
+      ];
+      for(var index = 0; index < plOpts.length; index++){
+        var polyline = new BMap.Polyline(plPath[index],plOpts[index]);
+        map.addOverlay(polyline);
+      }
     }
     //向地图添加控件
     function addMapControl(){
